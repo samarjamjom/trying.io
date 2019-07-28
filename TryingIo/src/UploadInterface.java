@@ -167,6 +167,6 @@ public class UploadInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> lang;
+    public static javax.swing.JComboBox<String> lang;
     // End of variables declaration//GEN-END:variables
 }
