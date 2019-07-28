@@ -92,21 +92,24 @@ public class MainMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    // action for exit button
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        // system exits from the program
         System.exit(0);
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    // action for upload source code button
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // declaring an interface with type uploadinterface
         in = new UploadInterface();
+        //make the interface visible
         in.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    // action for practice button
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        // declaring an interface with type practice interface
         PracticeInterface p =new PracticeInterface();
+        //make the interface visible
         p.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
