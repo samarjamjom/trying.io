@@ -128,6 +128,7 @@ public class MainMenu extends javax.swing.JFrame {
 
 // declaring an interface with type practice interface
         PracticeInterface p =new PracticeInterface(in.languag, s);
+        p.rem_time.setText(""+60);
         //make the interface visible
         p.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
