@@ -1,4 +1,5 @@
-sdf
-df
-dvf
+class a {
+a s ;
+int b;
+};
 

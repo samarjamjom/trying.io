@@ -11,7 +11,7 @@ import java.util.TimerTask;
 //import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.util.*; 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -31,7 +31,9 @@ public class PracticeInterface extends javax.swing.JFrame {
     String str; //Origin text
     int errors = 0; // counter of errors
     Timer t; //Timer
-    
+    int word_counter = 0; //counter to count number of word typed in one minute
+    Map<Character,Integer> map; 
+    Integer a;
     public PracticeInterface() {
         initComponents();
     }
@@ -45,6 +47,8 @@ public class PracticeInterface extends javax.swing.JFrame {
         str = s;
         //run timer ...
         update_time();
+        //..
+        map=new HashMap<Character,Integer>();     
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -192,8 +196,8 @@ public class PracticeInterface extends javax.swing.JFrame {
                     //inform user that it's time is over
                     JOptionPane.showMessageDialog(null, "End Attempt","Finish Time", JOptionPane.CLOSED_OPTION);
                     //Show Result to user
-                    ResultInterface res = new ResultInterface();
-                    res.setVisible(true);  
+                     ResultInterface res = new ResultInterface(word_counter, errors, map);
+                     res.setVisible(true);  
                 }
 
              }
@@ -206,14 +210,29 @@ public class PracticeInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
         //read user input char by char
         char c  = evt.getKeyChar();
+        
         if(c == KeyEvent.VK_BACK_SPACE)
             i--;
+        
         else if(i<str.length() && c != str.charAt(i) ){
+            a = map.get(str.charAt(i));
+            if(a==null)
+                a=0;
+             map.put(str.charAt(i),++a);  
             errors++;
+            i++;
+        }
+        else if(i<str.length()-1 && c ==' '&& str.charAt(i+1)!=' ' ){
+            word_counter++;
+            i++;
+        }
+         else if(i<str.length() && c =='\n' ){
+            word_counter++;
             i++;
         }
         else if(i>=str.length())
             errors++;
+        
         else
             i++;
     }//GEN-LAST:event_TypingAreaKeyTyped
@@ -221,7 +240,7 @@ public class PracticeInterface extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
        t.stop();
-       ResultInterface res = new ResultInterface();
+       ResultInterface res = new ResultInterface(word_counter, errors, map);
        res.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
