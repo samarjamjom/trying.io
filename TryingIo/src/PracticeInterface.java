@@ -6,9 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
-//import javax.swing.Timer;
+import javax.swing.Timer;
 import java.util.TimerTask;
-import java.util.Timer;
+//import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,19 +27,24 @@ public class PracticeInterface extends javax.swing.JFrame {
     /**
      * Creates new form PracticeInterface
      */
-    int i = 0;
-    String str;
-    int errors = 0;
-    Timer t;
+    int i = 0; // index indicate char typed in origin text
+    String str; //Origin text
+    int errors = 0; // counter of errors
+    Timer t; //Timer
     
     public PracticeInterface() {
         initComponents();
     }
     public PracticeInterface(String l, String s) {
         initComponents();
-        update_time();
+        //define the language ,the user will practice on it
         language.setText(l);
-        origin.setText(s);
+        //write the upload code on origin text_area 
+        origin.setText(s); 
+        //save source code in string variable to use it later in comparasion
+        str = s;
+        //run timer ...
+        update_time();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,42 +218,49 @@ public class PracticeInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
      public void update_time(){
-         /*
-         Timer time;
-         time = new Timer(1000, new ActionListener(){
-             
+         t= new Timer(1000, new ActionListener(){
              @Override
              public void actionPerformed(ActionEvent ae) {
-              int x = Integer.parseInt(rem_time.getText())-1;
+              int  x = Integer.parseInt(rem_time.getText())-1;
                rem_time.setText(""+x);
-             
+               //if the minute is over
+                    if(x == 0){
+                     //stop timer
+                    t.stop();  
+                    //inform user that it's time is over
+                    JOptionPane.showMessageDialog(null, "End Attempt","Finish Time", JOptionPane.CLOSED_OPTION);
+                    //Show Result to user
+                    ResultInterface res = new ResultInterface();
+                    res.setVisible(true);  
+                }
+
              }
          });
-        time.start();  
-        */
-        t = new Timer();
-        TimerTask tt = new TimerTask() {
-            @Override
-            public void run() {
-                int x = Integer.parseInt(rem_time.getText())-1;
-                rem_time.setText(""+x);
-                if(x == 0){
-                    t.cancel();
-                    JOptionPane.showMessageDialog(null, "End Attempt","Finish Time", JOptionPane.CLOSED_OPTION);
-                    ResultInterface res = new ResultInterface();
-                    res.setVisible(true);
-                }
-            }
-        };
-        t.schedule(tt,0,1000);
+         //Start Timer
+        t.start();  
+        
           }
     private void TypingAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TypingAreaKeyTyped
         // TODO add your handling code here:
-      
+        //read user input char by char
+        char c  = evt.getKeyChar();
+        if(c == KeyEvent.VK_BACK_SPACE)
+            i--;
+        else if(i<str.length() && c != str.charAt(i) ){
+            errors++;
+            i++;
+        }
+        else if(i>=str.length())
+            errors++;
+        else
+            i++;
     }//GEN-LAST:event_TypingAreaKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+       t.stop();
+       ResultInterface res = new ResultInterface();
+       res.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -297,6 +309,6 @@ public class PracticeInterface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     public static javax.swing.JLabel language;
     public static java.awt.TextArea origin;
-    private javax.swing.JLabel rem_time;
+    public static javax.swing.JLabel rem_time;
     // End of variables declaration//GEN-END:variables
 }
