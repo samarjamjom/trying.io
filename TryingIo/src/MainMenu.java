@@ -1,3 +1,10 @@
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -107,8 +114,20 @@ public class MainMenu extends javax.swing.JFrame {
 
     // action for practice button
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // declaring an interface with type practice interface
-        PracticeInterface p =new PracticeInterface();
+        String s = "";
+        String file_name = in.lang.getSelectedItem()+".txt";
+        try {
+            Scanner scn = new Scanner(new File (file_name));
+            while (scn.hasNextLine()){ //EOF
+                String line = scn.nextLine();
+                s+= (line+"\n");
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+// declaring an interface with type practice interface
+        PracticeInterface p =new PracticeInterface(in.languag, s);
         //make the interface visible
         p.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed

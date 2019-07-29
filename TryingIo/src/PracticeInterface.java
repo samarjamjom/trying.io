@@ -1,3 +1,17 @@
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+//import javax.swing.Timer;
+import java.util.TimerTask;
+import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,10 +27,20 @@ public class PracticeInterface extends javax.swing.JFrame {
     /**
      * Creates new form PracticeInterface
      */
+    int i = 0;
+    String str;
+    int errors = 0;
+    Timer t;
+    
     public PracticeInterface() {
         initComponents();
     }
-
+    public PracticeInterface(String l, String s) {
+        initComponents();
+        update_time();
+        language.setText(l);
+        origin.setText(s);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,7 +174,36 @@ public class PracticeInterface extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+     public void update_time(){
+         /*
+         Timer time;
+         time = new Timer(1000, new ActionListener(){
+             
+             @Override
+             public void actionPerformed(ActionEvent ae) {
+              int x = Integer.parseInt(rem_time.getText())-1;
+               rem_time.setText(""+x);
+             
+             }
+         });
+        time.start();  
+        */
+        t = new Timer();
+        TimerTask tt = new TimerTask() {
+            @Override
+            public void run() {
+                int x = Integer.parseInt(rem_time.getText())-1;
+                rem_time.setText(""+x);
+                if(x == 0){
+                    t.cancel();
+                    JOptionPane.showMessageDialog(null, "End Attempt","Finish Time", JOptionPane.CLOSED_OPTION);
+                    ResultInterface res = new ResultInterface();
+                    res.setVisible(true);
+                }
+            }
+        };
+        t.schedule(tt,0,1000);
+          }
     private void TypingAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TypingAreaKeyTyped
         // TODO add your handling code here:
       
