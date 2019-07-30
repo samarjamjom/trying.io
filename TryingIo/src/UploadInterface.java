@@ -12,7 +12,7 @@ public class UploadInterface extends javax.swing.JFrame {
     public UploadInterface() {
         initComponents();
     }
-
+   
     public String languag ; // string that saves the value of the language
     
     @SuppressWarnings("unchecked")
@@ -154,6 +154,7 @@ public class UploadInterface extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.toString() );
            
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -186,7 +187,8 @@ public class UploadInterface extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UploadInterface().setVisible(true);
+              
+               new UploadInterface().setVisible(true);
             }
         });
     }
