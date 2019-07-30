@@ -64,6 +64,10 @@ public class ResultInterface extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(32, 121, 172));
         jLabel2.setText("typing Speed:");
 
+        no_word.setEditable(false);
+
+        no_error.setEditable(false);
+
         jLabel3.setFont(new java.awt.Font("BankGothic Md BT", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(32, 121, 172));
         jLabel3.setText("Number Of Errors:");
@@ -88,6 +92,9 @@ public class ResultInterface extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(32, 121, 172));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("your results");
+
+        list.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        list.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
